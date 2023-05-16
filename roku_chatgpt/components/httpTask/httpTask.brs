@@ -39,14 +39,18 @@ sub handleResponse(event as object)
     code = event.getResponseCode()
     requestId = event.getSourceIdentity().toStr()
     request = m.pendingXfers[requestId].request
-
-    body = event.getString()
-    data = parseJson(body)
-    model = getModelData(request.modelType, data)
-
-    httpNode = request.httpNode
-    httpNode.response = {data: model.data, code: code}
-    
+    print "Response code: "; code
+    if code > 200 and code < 300
+        body = event.getString()
+        data = parseJson(body)
+        model = getModelData(request.modelType, data)
+        httpNode = request.httpNode
+        httpNode.response = { data: model.data, code: code }
+    else
+        httpNode = request.httpNode
+        httpNode.response = { data: invalid, code: code }
+    end if
+   
     m.pendingXfers[requestId] = invalid
 end sub
 

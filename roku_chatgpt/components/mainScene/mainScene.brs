@@ -32,7 +32,6 @@ sub addListItem(label as string, component as string)
 end sub
 
 sub listItemSelected()
-    print "in listItemSelected"; m.list
     selectedItem = m.list.itemSelected
     print "-- selected item "; selectedItem
 
@@ -51,7 +50,6 @@ sub listItemSelected()
 end sub
 
 function onKeyEvent(key as string, press as boolean) as boolean
-    print "in testList.xml onKeyEvent ";key;" "; press
     if press then
         if key = "back"
             if not (m.currentTest = invalid)
