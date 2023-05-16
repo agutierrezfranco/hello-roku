@@ -14,7 +14,7 @@ end sub
 sub fetchChatGPT(request as object)
     url = urlMapper("chat")
     request.addReplace("url", url)
-    request.addReplace("modelType", "baseModel")
+    request.addReplace("modelType", "chatModel")
     enqueue(request)
 end sub
 
