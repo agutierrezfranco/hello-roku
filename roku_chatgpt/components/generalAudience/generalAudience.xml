@@ -4,19 +4,21 @@
         <Rectangle id="Rectangle1">
             <Rectangle id="Rectangle2">
                 <Rectangle id="Rectangle4">
-                    <SimpleLabel
-                        id="Question"
-                        translation="[25, 100]">
-                    </SimpleLabel>
-                    <SimpleLabel
+                    <Label
                         id="Answer"
-                        translation="[450, 200]">
-                    </SimpleLabel>
+                        translation="[25, 25]"
+                        width="1150" 
+                        height="400" 
+                        vertAlign="center" 
+                        horizAlign="center"
+                        wrap="true"
+                        color="#000000"
+                        text="Your Answer">
+                    </Label>
                 <Rectangle id="Rectangle3">
                     <SimpleLabel id="SimpleLabel" />
                 </Rectangle>                 
                 </Rectangle>
-                <CustomKeyboard id="CustomKeyboard" />
                 <MarkupList id="MarkupList" />
             </Rectangle> 
         </Rectangle>    
