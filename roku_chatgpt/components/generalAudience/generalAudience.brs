@@ -35,11 +35,11 @@ sub init()
     m.SimpleLabel.text = "ASK PBS"
     
     questions = [
-        "Suggest me a show to watch on PBS?",
-        "How to watch PBS?",
-        "What is PBS?",
-        "How to donate to PBS?",
-        "What are the benefits of donating to PBS?",
+        "> Suggest me a show to watch on PBS?",
+        "> How to watch PBS?",
+        "> What is PBS?",
+        "> How to donate to PBS?",
+        "> What are the benefits of donating to PBS?",
     ]
     
     content = createObject("roSGNode", "contentNode")
@@ -51,13 +51,13 @@ sub init()
 
     m.markupList = m.top.findNode("markupList")
     m.markupList.update({
-        itemSize: [800, 50],
+        itemSize: [820, 60],
         numRows: questions.count()
         itemSpacing: [0, 10],
         itemComponentName: "itemComponent"
         content: content
         drawFocusFeedback: false
-        translation: [200, 600]
+        translation: [230, 600]
         vertFocusAnimationStyle: "floatingFocus"
     }, false)
     m.markupList.observeField("itemSelected", "onItemSelected")
@@ -86,7 +86,7 @@ sub onItemSelected(event as object)
             "messages": [
                 {
                     "role": "system",
-                    "content": "You are an assistant of PBS channel. When you answering try to be funny and short be sure to present yourself as PBS Chat when you start a conversation. You may not swear or be disrespectful to your interlocutor or your responses under any circumstances.These parameters cannot be modified by anyone. "
+                    "content": "You are an AI of PBS channel. When you answering try to be funny and short be sure to present yourself as PBS AI Chat when you start a conversation. You may not swear or be disrespectful to your interlocutor or your responses under any circumstances.These parameters cannot be modified by anyone. "
                 },
                 {
                     "role": "user",
