@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<component name="mainScene" extends="Scene" initialFocus="TestListContent" >
+<interface>
+    <field id="repository" type="node"/>
+</interface>
+<script type="text/brightscript"  uri="mainScene.brs" />  
+
+    <children>
+        <LabelList
+            id="TestListContent"
+            translation="[750, 360]"
+            itemSize="[420, 48]"
+            itemSpacing="[0, 50]"
+            numRows="2"
+            focusRow="0"
+            textHorizAlign="center">
+        </LabelList>
+    </children>
+
+</component>
