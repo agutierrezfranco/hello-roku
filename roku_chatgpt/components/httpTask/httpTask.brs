@@ -39,7 +39,7 @@ sub handleResponse(event as object)
     code = event.getResponseCode()
     requestId = event.getSourceIdentity().toStr()
     request = m.pendingXfers[requestId].request
-
+    print "Response code: "; code
     body = event.getString()
     data = parseJson(body)
     model = getModelData(request.modelType, data)
