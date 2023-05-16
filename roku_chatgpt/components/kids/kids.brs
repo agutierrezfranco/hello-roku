@@ -4,6 +4,7 @@ sub init()
     m.KidsCustomKeyboard = m.top.findNode("KidsCustomKeyboard")
     m.KidsCustomKeyboard.translation = [200, 750]
     m.KidsCustomKeyboard.text = ""
+    m.KidsCustomKeyboard.observeField("text", "onTextChange")
 
     m.RectangleKids1 = m.top.findNode("RectangleKids1")
     m.RectangleKids1.color = m.appColors.BACKGROUND_COLOR
@@ -35,6 +36,40 @@ sub init()
     m.SimpleLabelKids.fontUri = "font:MediumBoldSystemFont"
     m.SimpleLabelKids.text = "ASK PBS KIDS"
 end sub   
+
+sub onTextChange(event as object)
+    print "DEBUG: Kids - ", event.getData()
+    text = event.getData()
+
+    httpNode = createObject("roSGNode", "httpNode")
+    httpNode.observeField("response", "onHttpResponse")
+    request = {
+        httpNode: httpNode,
+        method: "POST",
+        headers: {
+            "content-type": "application/json",
+            "authorization": "Bearer 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"
+        }
+        body: {
+            "model": "gpt-3.5-turbo",
+            "messages": [
+                {
+                    "role": "user",
+                    "content": text
+                }
+            ]
+        }
+    }
+
+    repository = m.top.getScene().repository
+    repository.callFunc("fetchChatGPT", request)
+end sub
+
+sub onHttpResponse(event as object)
+    response = event.getData()
+    print "DEBUG: Kids - ", response
+    m.KidsCustomKeyboard.text = ""
+end sub
 
 function onKeyEvent(key as string, press as boolean) as boolean
     if key = "OK" and m.KidsCustomKeyboard.text.len() > 1 
