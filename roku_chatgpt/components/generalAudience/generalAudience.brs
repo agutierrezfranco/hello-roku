@@ -26,6 +26,7 @@ sub init()
     m.Rectangle4.translation = [50, 100]
 
     m.Answer = m.top.findNode("Answer")
+    m.Answer.font = "font:MediumBoldSystemFont"
 
     m.SimpleLabel = m.top.findNode("SimpleLabel")
     m.SimpleLabel.color = m.appColors.WHITE
@@ -98,13 +99,17 @@ end sub
 
 sub onHttpResponse(event as object)
     response = event.getData()
-    items = response.data.items
-    updateAnswerLabel(items[0].message)
+    if response.data <> invalid
+        items = response.data.items
+        message = items[0].message
+    else
+        message = "OOPS! PBS Chat is currently unavailable."
+    end if
+    updateAnswerLabel(message, "center")
 end sub
 
-function updateAnswerLabel(text as string)
-    m.Answer.horizAlign = "left"
+function updateAnswerLabel(text as string, horizAlign = "left" as string)
+    m.Answer.horizAlign = horizAlign
     m.Answer.color = m.appColors.BACKGROUND_COLOR
-    m.Answer.font.uri = "font:MediumBoldSystemFont"
     m.Answer.text = text
 end function
