@@ -2,6 +2,9 @@
 <component name="KidsCustomKeyboard" extends="DynamicCustomKeyboard" initialFocus="KidsCustomKeyboard">
     <interface>
     </interface>
+    <children>
+        <SimpleLabel id="SimpleLabel"/>
+    </children>
     <script type="text/brightscript" uri = "kidsCustomKeyboard.brs"/>
     <script type="text/brightscript" uri="pkg:/components/kidsCustomKeyboard/kidsCustomKeyboardConfig.brs" />
 </component>

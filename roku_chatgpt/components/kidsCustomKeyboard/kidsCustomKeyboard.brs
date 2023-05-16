@@ -32,11 +32,26 @@ sub init()
     inputBitmapBox = inputBitmap[0]
     inputBitmapBox.blendColor =m.appColors.YELLOW 
 
+    inputFontStyle = m.input.getChildren(-1, 0)
+    inputFontStyleSelected = inputFontStyle[0]
+    inputFontStyleBox= inputFontStyleSelected.getChildren(-1, 0)
+    inputFontStyleDefaultLabel = inputFontStyleBox[0]
+    inputFontStyleDefaultLabel.visible = false
+
     m.top.textEditBox.observeField("text", "onTextChanged")
 end sub
 
 sub onTextChanged(event as object)
     print "DEBUG: onTextChanged: " ; event.getData()
+
+    if m.top.textEditBox.text.len() > 1
+        inputLabel = m.top.findNode("SimpleLabel")
+        inputLabel.text = "Press & hold  to speak | Press OK to search"
+        inputLabel.color = m.appColors.PINK
+        inputLabel.fontUri = "font:SmallBoldSystemFont"
+        inputLabel.translation = [30, 120]
+    end if
+
 end sub
 
 sub keySelected()
