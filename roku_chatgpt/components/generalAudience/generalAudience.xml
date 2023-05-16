@@ -16,7 +16,6 @@
                     <SimpleLabel id="SimpleLabel" />
                 </Rectangle>                 
                 </Rectangle>
-                <CustomKeyboard id="CustomKeyboard" />
                 <MarkupList id="MarkupList" />
             </Rectangle> 
         </Rectangle>    

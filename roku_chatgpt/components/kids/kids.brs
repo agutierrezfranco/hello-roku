@@ -2,7 +2,7 @@ sub init()
     m.appColors = getAppColors()
 
     m.KidsCustomKeyboard = m.top.findNode("KidsCustomKeyboard")
-    m.KidsCustomKeyboard.translation = [200, 550]
+    m.KidsCustomKeyboard.translation = [200, 750]
     m.KidsCustomKeyboard.text = ""
 
     m.RectangleKids1 = m.top.findNode("RectangleKids1")
@@ -26,7 +26,7 @@ sub init()
     m.RectangleKids4 = m.top.findNode("RectangleKids4")
     m.RectangleKids4.color = m.appColors.WHITE
     m.RectangleKids4.width = 800
-    m.RectangleKids4.height = 400
+    m.RectangleKids4.height = 600
     m.RectangleKids4.translation = [200, 100]
 
     m.SimpleLabelKids = m.top.findNode("SimpleLabelKids")

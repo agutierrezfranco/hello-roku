@@ -1,8 +1,5 @@
 sub init()
     m.appColors = getAppColors()
-    m.CustomKeyboard = m.top.findNode("CustomKeyboard")
-    m.CustomKeyboard.translation = [ 200 , 550]   
-    m.CustomKeyboard.text = ""
 
     m.Rectangle1 = m.top.findNode("Rectangle1")
     m.Rectangle1.color = m.appColors.BACKGROUND_COLOR
@@ -25,7 +22,7 @@ sub init()
     m.Rectangle4 = m.top.findNode("Rectangle4")
     m.Rectangle4.color = m.appColors.WHITE
     m.Rectangle4.width = 800
-    m.Rectangle4.height = 400
+    m.Rectangle4.height = 500
     m.Rectangle4.translation = [200, 100]
 
     m.SimpleLabel = m.top.findNode("SimpleLabel")
@@ -95,10 +92,10 @@ sub onHttpResponse(event as object)
 end sub
 
 function onKeyEvent(key as string, press as boolean) as boolean
-    if key = "OK" and m.CustomKeyboard.text.len() > 1
-        updateQuestionLabel(m.CustomKeyboard.text)
-        return true
-    end if
+    ' if key = "OK" and m.CustomKeyboard.text.len() > 1
+    '     updateQuestionLabel(m.CustomKeyboard.text)
+    '     return true
+    ' end if
 end function
 
 function updateQuestionLabel(label as string)

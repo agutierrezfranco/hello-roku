@@ -1,7 +1,6 @@
 sub init()
     m.appColors = getAppColors()
     m.top.keyGrid.keyDefinitionUri = "pkg:/components/KidsCustomKeyboard/KidsCustomKeyboard.json"
-    m.top.keyGrid.vertWrap = true
 
     keyboardPalette = createObject("roSGNode", "RSGPalette")
     keyboardPalette.colors = {
@@ -23,12 +22,6 @@ sub init()
     m.top.textEditBox.fontUri = "font:MediumBoldSystemFont"
     m.top.textEditBox.fontSize = 38
 
-    'TextEditBox VoiceControls
-
-    m.top.textEditBox.inheritParentOpacity = false
-    m.top.textEditBox.inheritParentTransform = false
-    m.top.textEditBox.translation = [560, 560]
-
     'Input Field UI
     inputBox = m.top.textEditBox.getChildren(-1, 0)
     m.input = inputBox[4]
@@ -37,7 +30,7 @@ sub init()
     'Input Focus UI
     inputBitmap = m.input.getChildren(-1, 0)
     inputBitmapBox = inputBitmap[0]
-    inputBitmapBox.blendColor =m.appColors.YELLOW
+    inputBitmapBox.blendColor =m.appColors.YELLOW 
 
     m.top.textEditBox.observeField("text", "onTextChanged")
 end sub

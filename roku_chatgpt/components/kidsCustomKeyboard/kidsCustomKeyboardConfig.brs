@@ -6,4 +6,4 @@ function getAppColors()
         PINK: "#D741A7"
     }
     return this
-end function
+end function 
