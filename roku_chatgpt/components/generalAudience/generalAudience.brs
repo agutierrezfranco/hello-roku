@@ -77,10 +77,6 @@ sub onItemSelected(event as object)
     repository.callFunc("fetchChatGPT", {
         httpNode: httpNode, 
         method:"POST",
-        headers: { 
-            "content-type": "application/json",
-            "authorization": "Bearer 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"
-        }
         body: {
             "model": "gpt-3.5-turbo",
             "messages": [
