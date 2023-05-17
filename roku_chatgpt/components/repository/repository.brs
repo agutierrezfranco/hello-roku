@@ -1,5 +1,6 @@
 sub init()
     print "DEBUG: init() - repository"
+    m.appInfo = createObject("roAppInfo")
     m.httpTask = createObject("roSGNode", "httpTask")
     m.httpTask.control = "run"
 end sub
@@ -13,7 +14,10 @@ end sub
 
 sub fetchChatGPT(request as object)
     url = urlMapper("chat")
+    headers = setHeaders()
+
     request.addReplace("url", url)
+    request.addReplace("headers", headers)
     request.addReplace("modelType", "chatModel")
     enqueue(request)
 end sub
@@ -30,4 +34,14 @@ function urlMapper(key as string)
     if urls.doesExist(key) then
         return urls[key]
     end if
+end function
+
+function setHeaders()
+    apiKey = m.appInfo.getValue("api_key")
+    authorization = "Bearer " + apiKey
+    headers = {
+        "content-type": "application/json",
+        "authorization": authorization
+    }
+    return headers
 end function
