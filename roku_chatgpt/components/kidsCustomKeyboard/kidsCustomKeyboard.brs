@@ -12,7 +12,6 @@ sub init()
     m.top.keyGrid.palette = keyboardPalette   
 
     m.top.textEditBox.voiceEnabled = true
-    m.top.textEditBox.maxTextLength = 30
     m.top.textEditBox.clearOnDownKey = true
     m.top.textEditBox.hintText = "Please, select one topic"
 
@@ -44,12 +43,12 @@ end sub
 sub onTextChanged(event as object)
     print "DEBUG: onTextChanged: " ; event.getData()
 
-    if m.top.textEditBox.text.len() > 1
+    if m.top.textEditBox.text.len() > 0
         inputLabel = m.top.findNode("SimpleLabel")
-        inputLabel.text = "Press & hold  to speak | Press OK to search"
+        inputLabel.text = "Press & hold  to speak"
         inputLabel.color = m.appColors.PINK
         inputLabel.fontUri = "font:SmallBoldSystemFont"
-        inputLabel.translation = [30, 120]
+        inputLabel.translation = [400, 120]
     end if
 
 end sub

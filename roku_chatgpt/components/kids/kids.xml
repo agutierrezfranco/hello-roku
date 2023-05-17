@@ -10,11 +10,14 @@
                     </SimpleLabel>
                     <Label
                         id="AnswerKids"
-                        color="#000000"
-                        translation="[0, 100]"
+                        translation="[25, 75]"
+                        width="1150" 
+                        height="500" 
                         vertAlign="center" 
                         horizAlign="center"
-                        text="Your Answer" >
+                        wrap="true"
+                        color="#000000"
+                        text="Your Answer">
                     </Label>
                 <Rectangle id="RectangleKids3">
                     <SimpleLabel id="SimpleLabelKids"/>

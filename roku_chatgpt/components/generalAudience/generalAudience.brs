@@ -79,7 +79,7 @@ sub onItemSelected(event as object)
         method:"POST",
         headers: { 
             "content-type": "application/json",
-            "authorization": "Bearer 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"
+            "Authorization": "Bearer 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"
         }
         body: {
             "model": "gpt-3.5-turbo",

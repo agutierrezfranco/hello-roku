@@ -1,9 +1,9 @@
 {
     "keyboardHeightFHD": 50,
-    "keyboardWidthFHD": 800,
+    "keyboardWidthFHD": 1200,
     "sections": [
         {
-            "sectionWidthFHD": 600,
+            "sectionWidthFHD": 1200,
             "grids": [
                 {
                     "rows": []
