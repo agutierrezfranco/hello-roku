@@ -6,9 +6,9 @@
                 <Rectangle id="Rectangle4">
                     <Label
                         id="Answer"
-                        translation="[25, 25]"
+                        translation="[25, 55]"
                         width="1150" 
-                        height="400" 
+                        height="450" 
                         vertAlign="center" 
                         horizAlign="center"
                         wrap="true"

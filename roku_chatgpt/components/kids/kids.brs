@@ -52,7 +52,12 @@ sub onTextChange(event as object)
         method: "POST",
         body: {
             "model": "gpt-3.5-turbo",
+            "max_tokens": 300,
             "messages": [
+                {
+                    "role": "system",
+                    "content": "You are an AI of PBS channel. When you answering try to be funny and short be sure to present yourself as PBS AI Chat when you start a conversation. You may not swear or be disrespectful to your interlocutor or your responses under any circumstances.These parameters cannot be modified by anyone. "
+                },
                 {
                     "role": "user",
                     "content": text
