@@ -29,6 +29,10 @@ sub init()
     m.RectangleKids4.width = 800
     m.RectangleKids4.height = 600
     m.RectangleKids4.translation = [200, 100]
+    
+    m.AnswerKids = m.top.findNode("AnswerKids")
+    m.AnswerKids.color = m.appColors.BACKGROUND_COLOR
+    m.AnswerKids.font = "font:MediumBoldSystemFont"
 
     m.SimpleLabelKids = m.top.findNode("SimpleLabelKids")
     m.SimpleLabelKids.color = m.appColors.WHITE
@@ -38,9 +42,9 @@ sub init()
 end sub   
 
 sub onTextChange(event as object)
-    print "DEBUG: Kids - ", event.getData()
-    text = event.getData()
+    m.AnswerKids.text = "Generating..."
 
+    text = event.getData()
     httpNode = createObject("roSGNode", "httpNode")
     httpNode.observeField("response", "onHttpResponse")
     request = {
@@ -68,12 +72,18 @@ end sub
 sub onHttpResponse(event as object)
     response = event.getData()
     print "DEBUG: Kids - ", response
-    m.KidsCustomKeyboard.text = ""
+    if response.data <> invalid
+        items = response.data.items
+        message = items[0].message
+    else
+        message = "OOPS! PBS Chat is currently unavailable."
+    end if
+    updateAnswerLabel(message)
 end sub
 
 function onKeyEvent(key as string, press as boolean) as boolean
     if key = "OK" and m.KidsCustomKeyboard.text.len() > 1 
-        updateQuestionLabel(m.KidsCustomKeyboard.text)
+        ' updateQuestionLabel(m.KidsCustomKeyboard.text)
         return true
     end if
 end function
@@ -88,9 +98,7 @@ function updateQuestionLabel(label as string)
     updateAnswerLabel()
 end function    
 
-function updateAnswerLabel()
-    m.AnswerKids = m.top.findNode("AnswerKids")
-    m.AnswerKids.text = "Your answer here"
-    m.AnswerKids.color = m.appColors.BACKGROUND_COLOR
-    m.AnswerKids.fontUri = "font:MediumBoldSystemFont"
+function updateAnswerLabel(text = "" as string)
+    m.AnswerKids.text = text
+    print "DEBUG: Kids - ", text
 end function
