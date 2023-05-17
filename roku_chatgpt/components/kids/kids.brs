@@ -50,10 +50,6 @@ sub onTextChange(event as object)
     request = {
         httpNode: httpNode,
         method: "POST",
-        headers: {
-            "content-type": "application/json",
-            "Authorization": "Bearer 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"
-        }
         body: {
             "model": "gpt-3.5-turbo",
             "messages": [
