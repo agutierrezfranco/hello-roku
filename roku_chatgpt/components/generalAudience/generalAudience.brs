@@ -22,7 +22,7 @@ sub init()
     m.Rectangle4 = m.top.findNode("Rectangle4")
     m.Rectangle4.color = m.appColors.WHITE
     m.Rectangle4.width = 1200
-    m.Rectangle4.height = 400
+    m.Rectangle4.height = 500
     m.Rectangle4.translation = [50, 100]
 
     m.Answer = m.top.findNode("Answer")
@@ -57,7 +57,7 @@ sub init()
         itemComponentName: "itemComponent"
         content: content
         drawFocusFeedback: false
-        translation: [230, 600]
+        translation: [230, 620]
         vertFocusAnimationStyle: "floatingFocus"
     }, false)
     m.markupList.observeField("itemSelected", "onItemSelected")
@@ -79,6 +79,7 @@ sub onItemSelected(event as object)
         method:"POST",
         body: {
             "model": "gpt-3.5-turbo",
+            "max_tokens": 300,
             "messages": [
                 {
                     "role": "system",

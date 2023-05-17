@@ -40,7 +40,7 @@ sub handleResponse(event as object)
     requestId = event.getSourceIdentity().toStr()
     request = m.pendingXfers[requestId].request
     print "Response code: "; code
-    if code > 200 and code < 300
+    if code >= 200 and code < 300
         body = event.getString()
         data = parseJson(body)
         model = getModelData(request.modelType, data)

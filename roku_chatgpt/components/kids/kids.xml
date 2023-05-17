@@ -8,10 +8,17 @@
                         id="QuestionKids"
                         translation="[25, 100]">
                     </SimpleLabel>
-                    <SimpleLabel
+                    <Label
                         id="AnswerKids"
-                        translation="[450, 200]">
-                    </SimpleLabel>
+                        translation="[25, 75]"
+                        width="1150" 
+                        height="500" 
+                        vertAlign="center" 
+                        horizAlign="center"
+                        wrap="true"
+                        color="#000000"
+                        text="Your Answer">
+                    </Label>
                 <Rectangle id="RectangleKids3">
                     <SimpleLabel id="SimpleLabelKids"/>
                 </Rectangle>                 

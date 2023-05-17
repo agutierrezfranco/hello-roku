@@ -1,43 +1,12 @@
 {
-    "keyboardHeightFHD": 260,
-    "keyboardWidthFHD": 800,
-
+    "keyboardHeightFHD": 50,
+    "keyboardWidthFHD": 1200,
     "sections": [
         {
-            "sectionWidthFHD": 600,
+            "sectionWidthFHD": 1200,
             "grids": [
                 {
-                    "rows": [
-                        
-                        {
-                            "keys": [
-                                {
-                                    "label":"PBS kids programming",
-                                    "strOut": "PBS kids programming"
-                                }
-                            ] 
-                        },
-                        {
-                        },
-                        {      
-                            "keys": [
-                                {
-                                    "label": "Where can i find PBS kids games",
-                                    "strOut": "Where can i find PBS kids games"
-                                }
-                            ]    
-                        },
-                        {
-                        },
-                        {
-                            "keys": [
-                                {
-                                    "label": "Local PBS station's schedule",
-                                    "strOut": "Local PBS station's schedule"
-                                }
-                            ]
-                        }
-                    ]
+                    "rows": []
                 }
             ]
         }

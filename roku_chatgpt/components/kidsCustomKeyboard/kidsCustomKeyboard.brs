@@ -1,7 +1,6 @@
 sub init()
     m.appColors = getAppColors()
     m.top.keyGrid.keyDefinitionUri = "pkg:/components/KidsCustomKeyboard/KidsCustomKeyboard.json"
-    m.top.keyGrid.vertWrap = true
 
     keyboardPalette = createObject("roSGNode", "RSGPalette")
     keyboardPalette.colors = {
@@ -13,7 +12,6 @@ sub init()
     m.top.keyGrid.palette = keyboardPalette   
 
     m.top.textEditBox.voiceEnabled = true
-    m.top.textEditBox.maxTextLength = 30
     m.top.textEditBox.clearOnDownKey = true
     m.top.textEditBox.hintText = "Please, select one topic"
 
@@ -23,12 +21,6 @@ sub init()
     m.top.textEditBox.fontUri = "font:MediumBoldSystemFont"
     m.top.textEditBox.fontSize = 38
 
-    'TextEditBox VoiceControls
-
-    m.top.textEditBox.inheritParentOpacity = false
-    m.top.textEditBox.inheritParentTransform = false
-    m.top.textEditBox.translation = [560, 560]
-
     'Input Field UI
     inputBox = m.top.textEditBox.getChildren(-1, 0)
     m.input = inputBox[4]
@@ -37,13 +29,28 @@ sub init()
     'Input Focus UI
     inputBitmap = m.input.getChildren(-1, 0)
     inputBitmapBox = inputBitmap[0]
-    inputBitmapBox.blendColor =m.appColors.YELLOW
+    inputBitmapBox.blendColor =m.appColors.YELLOW 
+
+    inputFontStyle = m.input.getChildren(-1, 0)
+    inputFontStyleSelected = inputFontStyle[0]
+    inputFontStyleBox= inputFontStyleSelected.getChildren(-1, 0)
+    inputFontStyleDefaultLabel = inputFontStyleBox[0]
+    inputFontStyleDefaultLabel.visible = false
 
     m.top.textEditBox.observeField("text", "onTextChanged")
 end sub
 
 sub onTextChanged(event as object)
     print "DEBUG: onTextChanged: " ; event.getData()
+
+    if m.top.textEditBox.text.len() > 0
+        inputLabel = m.top.findNode("SimpleLabel")
+        inputLabel.text = "Press & hold  to speak"
+        inputLabel.color = m.appColors.PINK
+        inputLabel.fontUri = "font:SmallBoldSystemFont"
+        inputLabel.translation = [400, 120]
+    end if
+
 end sub
 
 sub keySelected()
