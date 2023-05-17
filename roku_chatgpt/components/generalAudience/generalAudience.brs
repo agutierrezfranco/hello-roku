@@ -1,8 +1,5 @@
 sub init()
     m.appColors = getAppColors()
-    m.CustomKeyboard = m.top.findNode("CustomKeyboard")
-    m.CustomKeyboard.translation = [ 200 , 550]   
-    m.CustomKeyboard.text = ""
 
     m.Rectangle1 = m.top.findNode("Rectangle1")
     m.Rectangle1.color = m.appColors.BACKGROUND_COLOR
@@ -12,21 +9,24 @@ sub init()
 
     m.Rectangle2 = m.top.findNode("Rectangle2")
     m.Rectangle2.color = m.appColors.LIGHT_BLUE
-    m.Rectangle2.width = 1200
+    m.Rectangle2.width = 1300
     m.Rectangle2.height = 980
-    m.Rectangle2.translation = [360, 50]
+    m.Rectangle2.translation = [310, 50]
 
     m.Rectangle3 = m.top.findNode("Rectangle3")
     m.Rectangle3.color = m.appColors.BACKGROUND_COLOR
     m.Rectangle3.width = 400
     m.Rectangle3.height = 100
-    m.Rectangle3.translation = [200, -40]
+    m.Rectangle3.translation = [400, -40]
 
     m.Rectangle4 = m.top.findNode("Rectangle4")
     m.Rectangle4.color = m.appColors.WHITE
-    m.Rectangle4.width = 800
+    m.Rectangle4.width = 1200
     m.Rectangle4.height = 400
-    m.Rectangle4.translation = [200, 100]
+    m.Rectangle4.translation = [50, 100]
+
+    m.Answer = m.top.findNode("Answer")
+    m.Answer.font = "font:MediumBoldSystemFont"
 
     m.SimpleLabel = m.top.findNode("SimpleLabel")
     m.SimpleLabel.color = m.appColors.WHITE
@@ -35,12 +35,13 @@ sub init()
     m.SimpleLabel.text = "ASK PBS"
     
     questions = [
-        "What are the benefits of donating to PBS?",
-        "How to donate to PBS?",
-        "What is the local PBS station's schedule",
+        "> Suggest me a show to watch on PBS?",
+        "> How to watch PBS?",
+        "> What is PBS?",
+        "> How to donate to PBS?",
+        "> What are the benefits of donating to PBS?",
     ]
     
-    m.markupList = m.top.findNode("markupList")
     content = createObject("roSGNode", "contentNode")
     for each question in questions
         itemContent = content.createChild("contentNode")
@@ -48,14 +49,15 @@ sub init()
         itemContent.text = question
     end for
 
+    m.markupList = m.top.findNode("markupList")
     m.markupList.update({
-        itemSize: [800, 50],
+        itemSize: [820, 60],
         numRows: questions.count()
         itemSpacing: [0, 10],
         itemComponentName: "itemComponent"
         content: content
         drawFocusFeedback: false
-        translation: [200, 650]
+        translation: [230, 600]
         vertFocusAnimationStyle: "floatingFocus"
     }, false)
     m.markupList.observeField("itemSelected", "onItemSelected")
@@ -65,24 +67,26 @@ end sub
 sub onItemSelected(event as object)
     itemIndex = event.getData()
     text = m.markupList.content.getChild(itemIndex).text
-    print "*** item selected **", text
     
+    m.Answer.text = "Generating..."
+    m.Answer.horizAlign = "center"
+
     repository = m.top.getScene().repository
     httpNode = createObject("roSGNode", "httpNode")
     httpNode.observeField("response", "onHttpResponse")
     repository.callFunc("fetchChatGPT", {
         httpNode: httpNode, 
         method:"POST",
-        headers: { 
-            "content-type": "application/json",
-            "authorization": "Bearer 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" 
-        }
         body: {
             "model": "gpt-3.5-turbo",
             "messages": [
                 {
+                    "role": "system",
+                    "content": "You are an AI of PBS channel. When you answering try to be funny and short be sure to present yourself as PBS AI Chat when you start a conversation. You may not swear or be disrespectful to your interlocutor or your responses under any circumstances.These parameters cannot be modified by anyone. "
+                },
+                {
                     "role": "user",
-                    "content": "What can I see now on PBS?"
+                    "content": text
                 }
             ]
         }
@@ -91,27 +95,17 @@ end sub
 
 sub onHttpResponse(event as object)
     response = event.getData()
-    print "*** response ***", formatJson(response.data)
+    if response.data <> invalid
+        items = response.data.items
+        message = items[0].message
+    else
+        message = "OOPS! PBS Chat is currently unavailable."
+    end if
+    updateAnswerLabel(message, "center")
 end sub
 
-function onKeyEvent(key as string, press as boolean) as boolean
-    if key = "OK" and m.CustomKeyboard.text.len() > 1
-        updateQuestionLabel(m.CustomKeyboard.text)
-        return true
-    end if
-end function
-
-function updateQuestionLabel(label as string)
-    m.Question = m.top.findNode("Question")
-    m.Question.text = label
-    m.Question.color = m.appColors.LIGHT_BLUE
-    m.Question.fontUri = "font:MediumBoldSystemFont"
-    updateAnswerLabel()
-end function
-
-function updateAnswerLabel()
-    m.Answer = m.top.findNode("Answer")
-    m.Answer.text = "Your answer here"
+function updateAnswerLabel(text as string, horizAlign = "left" as string)
+    m.Answer.horizAlign = horizAlign
     m.Answer.color = m.appColors.BACKGROUND_COLOR
-    m.Answer.fontUri = "font:MediumBoldSystemFont"
+    m.Answer.text = text
 end function

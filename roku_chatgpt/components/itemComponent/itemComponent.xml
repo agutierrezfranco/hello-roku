@@ -4,10 +4,12 @@
         <field id="itemContent" type="node" onChange="onContentChange"/>
         <field id="focusPercent" type="float" onChange="focusPercentChanged"/>
     </interface>
-    <script type="text/brightscript" uri="itemComponent.brs" />
     <children>
-        <rectangle id="rectangle" color="#FFFFFF" width="800" height="50">
-            <label id="label" color="#000000" width="800" height="50" vertAlign="center" horizAlign="left"/>
+        <rectangle id="rectangle" color="#FFFFFF" width="820" height="60">
+            <label id="label" translation="[10, 5]" color="#000000" width="800" height="50" vertAlign="center" horizAlign="left"/>
         </rectangle>
     </children>
+
+    <script type="text/brightscript" uri="itemComponent.brs" />
+    <script type="text/brightscript" uri="pkg:/components/customKeyboard/customKeyboardConfig.brs" />
 </component>
